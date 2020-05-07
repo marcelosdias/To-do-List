@@ -26,6 +26,7 @@
 
 ## DOTENV CONFIG
 If you want to use localhost, it's necessary just DB_USER, DB_PASSWORD and DB_DATABASE
+```
 # DB CONFIG
 DB_CLIENT = 
 DB_HOST = 
@@ -33,12 +34,13 @@ DB_USER =
 DB_PASSWORD = 
 DB_DATABASE = 
 DB_PORT = 
-
+```
 # SEED CONFIG
+```
 ADM_USER = 
 ADM_EMAIL = 
 ADM_PASSWORD = 
-
+```
 # APP CONFIG
 PORT = 
 
