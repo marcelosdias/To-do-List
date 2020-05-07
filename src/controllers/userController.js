@@ -79,7 +79,7 @@ module.exports = {
     },
 
     async update(req, res) {
-        const { id } = req.params
+        const { userId } = req.params
 
         const {
             name,
@@ -101,7 +101,7 @@ module.exports = {
             bcrypt.hash(password, 10, async (error, hash) => {
                 if (!error) {
                     await db.from('users')
-                    .where({ id })
+                    .where({ id: userId })
                     .update({
                         name,
                         email: email.toLowerCase(),
@@ -128,10 +128,10 @@ module.exports = {
     },
 
     async delete(req, res) {
-        const { id } = req.params
+        const { userId } = req.params
 
         await db.from('users')
-        .where({ id })
+        .where({ id: userId })
         .del()
         .then(deleted => {
             if (deleted === 0) {

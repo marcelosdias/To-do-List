@@ -8,7 +8,7 @@ routes
     .post('/login', userController.login)
 
     .get('/user/index', userController.getAll)
-    .put('/user/', authMiddleware.auth, userController.update)
-    .delete('/user/:id', authMiddleware.auth, userController.delete)
+    .put('/user', authMiddleware.auth, userController.update)
+    .delete('/user', authMiddleware.auth, userController.delete)
 
 module.exports = routes
