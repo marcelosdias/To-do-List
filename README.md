@@ -25,7 +25,7 @@
   npx knex seed: run --specific seed_name
 
 ## DOTENV CONFIG
-# If you want to use localhost, it's necessary just DB_USER, DB_PASSWORD and DB_DATABASE
+If you want to use localhost, it's necessary just DB_USER, DB_PASSWORD and DB_DATABASE
 # DB CONFIG
 DB_CLIENT = 
 DB_HOST = 
