@@ -1,23 +1,49 @@
-# To-do-List
+## To-do-List (BACK-END)
 
-# Gerar o knexfile.js
+# Install dependencies and create tables
+  npm run project-init
+
+# Run Server
+  npm run dev
+
+# Create knexfile.js
   npx knex init
 
-# Criar migrations
+# Create Migrations
   npx knex migrate: make create_table_name
 
-# Criar seeds
+# Create Seeds
   npx knex seed:make name_seed
 
-# Rodar migrations
+# Run Migrations
   npx knex migrate:latest
 
-# Rodar seeds
+# Run Seeds
   npx knex seed:run
 
-# Rodar seed especifica
+# Run Specific Seed
   npx knex seed: run --specific seed_name
 
+## DOTENV CONFIG
+# If you want to use localhost, it's necessary just DB_USER, DB_PASSWORD and DB_DATABASE
+# DB CONFIG
+DB_CLIENT = 
+DB_HOST = 
+DB_USER = 
+DB_PASSWORD = 
+DB_DATABASE = 
+DB_PORT = 
+
+# SEED CONFIG
+ADM_USER = 
+ADM_EMAIL = 
+ADM_PASSWORD = 
+
+# APP CONFIG
+PORT = 
+
+# JWT CONFIG
+SECRET = 
 
 
 

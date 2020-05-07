@@ -34,7 +34,8 @@ module.exports = {
         .then(posts => {
             return res.json({ error: false, ...posts[0] })
         })
-        .catch(() => {
+        .catch(error => {
+            console.log(error)
             return res.status(400).json({ error: true, error_message: 'Create To-do error' })
         })
     },
