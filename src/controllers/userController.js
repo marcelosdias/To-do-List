@@ -143,5 +143,14 @@ module.exports = {
         .catch(() => {
             return res.status(400).json({ error: true, error_message: 'Delete user error' })
         })
+    },
+    async getAll(req, res) {
+        await db.select('*').from('users')
+        .then(users => {
+            return res.json(users)
+        })
+        .catch(() => {
+            return res.status(400).json({ error: true , error_message: 'Query error' })
+        })
     }
 }

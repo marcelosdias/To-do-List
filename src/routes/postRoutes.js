@@ -4,6 +4,7 @@ const authMiddleware = require('../middlewares/auth')
 const routes = express.Router()
 
 routes
+    .get('/post/index', postController.showAll)
     .get('/post', authMiddleware.auth, postController.index)
     .post('/post', authMiddleware.auth, postController.create)
     .put('/post/:id', authMiddleware.auth, postController.update)

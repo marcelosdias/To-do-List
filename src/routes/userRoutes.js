@@ -7,6 +7,7 @@ routes
     .post('/register', userController.register)
     .post('/login', userController.login)
 
+    .get('/user/index', userController.getAll)
     .put('/user/', authMiddleware.auth, userController.update)
     .delete('/user/:id', authMiddleware.auth, userController.delete)
 

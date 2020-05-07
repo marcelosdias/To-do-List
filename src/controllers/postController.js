@@ -74,5 +74,15 @@ module.exports = {
         .catch(() => {
             return res.status(400).json({ error: true, error_message: 'Query error' })
         })
+    },
+
+    async showAll(req, res) {
+        await db.select('*').from('posts')
+        .then(posts => {
+            return res.json(posts)
+        })
+        .catch(() => {
+            return res.status(400).json({ error: true, error_message: 'Query error' })
+        })
     }
 }
