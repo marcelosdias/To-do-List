@@ -31,14 +31,15 @@ module.exports = {
             
             bcrypt.hash(password, 10, async (error, hash) => {
                 if (!error) {
-                    await db('users').insert({
+                    await db.insert({
                         name,
                         email: email.toLowerCase(),
                         password: hash
                     })
+                    .into('users')
                     .returning(['id', 'name', 'email'])
                     .then(user => {
-                        return res.json({ error: false, ...user[0], token: generateToken({ id: user.id }) })
+                        return res.json({ error: false, ...user[0], ...{ token: generateToken({ id: user[0].id }) } })
                     })
                     .catch(() => {
                         return res.status(400).json({ error: true , error_message: 'Create user error' })
@@ -66,7 +67,7 @@ module.exports = {
         bcrypt.compare(password, user[0].password, (error, status) => {
                 if (status) {
                     user[0].password = undefined
-                        return res.json({ error: false, ...user[0], token: generateToken({ id: user.id }) })
+                        return res.json({ error: false, ...user[0], ...{ token: generateToken({ id: user[0].id }) } })
                 } else {
                     return res.status(400).json({ error: true, error_message: 'Invalid password' })
                 }
