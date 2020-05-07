@@ -3,6 +3,7 @@ require('dotenv').config()
 module.exports = {
   development: {
     client: process.env.DB_CLIENT,
+    ssl: true,
     connection: {
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
