@@ -9,10 +9,6 @@ module.exports = {
         .join('users', 'users.id', '=', 'posts.userId')
         .select('posts.*')
         .then(posts => {
-            if (posts.length === 0) {
-                return res.status(400).json({ error: true, error_message: 'To-do-List not found' })
-            }
-
             return res.json({ error: false, posts })
         })
         .catch(() => {

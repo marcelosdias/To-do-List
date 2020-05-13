@@ -1,5 +1,5 @@
 const db = require('../database')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 require('dotenv').config()
@@ -64,7 +64,7 @@ module.exports = {
                 return res.status(400).json({ error: true, error_message: 'Email does not exist' })
             }
 
-        bcrypt.compare(password, user[0].password, (error, status) => {
+            bcrypt.compare(password, user[0].password, (error, status) => {
                 if (status) {
                     user[0].password = undefined
                         return res.json({ error: false, ...user[0], ...{ token: generateToken({ id: user[0].id }) } })
@@ -94,7 +94,7 @@ module.exports = {
         await db.select('*').from('users')
         .where({ email })
         .then(async user => {
-            if (user.length > 0) {
+            if (user.length > 0 && user[0].id !== userId) {
                 return res.status(400).json({ error: true, error_message: 'Email already exists' })
             }
 
@@ -115,7 +115,7 @@ module.exports = {
                         return res.json({ error: false, message: 'User updated'})
                     })
                     .catch(() => {
-                        return res.status(400).json({ error: true , error_message: '' })
+                        return res.status(400).json({ error: true , error_message: 'User update error' })
                     })
                 } else {
                     return res.status(400).json({ error: true, error_message: 'Generate hash error' })
