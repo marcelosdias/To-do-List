@@ -34,10 +34,11 @@ module.exports = {
                     await db.insert({
                         name,
                         email: email.toLowerCase(),
-                        password: hash
+                        password: hash,
+                        theme: 'light'
                     })
                     .into('users')
-                    .returning(['id', 'name', 'email'])
+                    .returning(['id', 'name', 'email', 'theme'])
                     .then(user => {
                         return res.json({ error: false, ...user[0], ...{ token: generateToken({ id: user[0].id }) } })
                     })
@@ -108,7 +109,7 @@ module.exports = {
                         password: hash
                      })
                     .then(updated => {
-                        if (updated === 0) {
+                        if (updated.length === 0) {
                             return res.json({ error: true, error_message: 'User not found'})
                         }
 
@@ -134,7 +135,7 @@ module.exports = {
         .where({ id: userId })
         .del()
         .then(deleted => {
-            if (deleted === 0) {
+            if (deleted.length === 0) {
                 return res.status(400).json({ error: true, error_message: 'User not found' })
             }
             
@@ -151,6 +152,25 @@ module.exports = {
         })
         .catch(() => {
             return res.status(400).json({ error: true , error_message: 'Query error' })
+        })
+    },
+
+    async updateTheme(req, res) {
+        const { userId } = req.params
+        const { theme } = req.body
+
+        await db('users')
+        .where({ id: userId })
+        .update({ theme })
+        .then(updated => {
+            if (updated.length === 0) {
+                return res.json({ error: true, error_message: 'User not found'})
+            }
+
+            return res.json({ error: false, message: 'Theme updated'})
+        })
+        .catch(() => {
+            return res.json({ error_message: 'Update Theme error' })
         })
     }
 }

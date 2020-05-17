@@ -20,10 +20,10 @@ module.exports = {
         const { userId } = req.params
         const { title, status } = req.body
        
-        await db.insert({ 
+        await db.insert({
             title,
             status,
-            userId  
+            userId 
         })
         .into('posts')
         .returning('*')

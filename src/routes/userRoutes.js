@@ -9,6 +9,7 @@ routes
 
     .get('/user/index', userController.getAll)
     .put('/user', authMiddleware.auth, userController.update)
+    .put('/user/theme', authMiddleware.auth, userController.updateTheme)
     .delete('/user', authMiddleware.auth, userController.delete)
 
 module.exports = routes
